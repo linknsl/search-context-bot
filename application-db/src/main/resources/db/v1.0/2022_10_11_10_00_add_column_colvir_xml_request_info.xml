@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="LizogubNS" id="2022_10_11_10_00_add_column_colvir_xml_request_info">
+        <comment>
+            Добавление колонки colvir_xml_body
+        </comment>
+        <addColumn tableName="request_info" schemaName="bpmn_info">
+            <column name="colvir_xml_body" type="VARCHAR(255)" remarks="Описание" afterColumn="ogrn"/>
+        </addColumn>
+
+        <rollback>
+            <dropColumn tableName="request_info" schemaName="bpmn_info">
+                <column name="colvir_xml_body"/>
+            </dropColumn>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

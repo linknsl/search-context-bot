@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  search-flat:
+    image: 'search-flat:latest'
+    container_name: search-flat
+    environment:
+      - SPRING_PROFILES_ACTIVE=${PROFILE}
+    ports:
+      - "8080:8080"

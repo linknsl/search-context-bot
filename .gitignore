@@ -1,0 +1,4 @@
+# Project exclude paths
+/application-db/target/
+/config-server/target/
+/search-flat/target/

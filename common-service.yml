@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  config-server:
+    image: 'config-server:latest'
+    container_name: config-server
+    environment:
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=${CONFIG_URL}
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME=${CONFIG_USERNAME}
+      - SPRING_CLOUD_CONFIG_SERVER_GIT_PASSWORD=${CONFIG_PASSWORD}
+    ports:
+      - "8888:8888"
+  db:
+    image: 'postgres:13.1-alpine'
+    restart: always
+    container_name: db
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${DATASOURCE_USERNAME}
+      - POSTGRES_PASSWORD=${DATASOURCE_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}

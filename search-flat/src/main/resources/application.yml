@@ -1,0 +1,22 @@
+springdoc:
+  swagger-ui:
+    enabled: true
+    config-url: /search/v3/api-docs/swagger-config
+    url: /search/v3/api-docs
+server:
+  port: 8080
+logging:
+  level:
+    org.springframework: WARN
+app.version: '@project.version@'
+spring.application.name: search-flat
+---
+spring:
+  config:
+    activate.on-profile: prod
+    import: configserver:http://worldlns.ru:8888/
+---
+spring:
+  config:
+    activate.on-profile: test,dev
+    import: configserver:http://localhost:8888/

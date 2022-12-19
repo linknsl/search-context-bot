@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SearchFlatApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" singleton="false">
+    <module name="search-flat" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.lns.search.SearchFlatApplication" />
+    <option name="ACTIVE_PROFILES" value="dev,db" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs>
+      <env name="NODE_OPTIONS" value="--max_old_space_size=2560" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

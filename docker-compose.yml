@@ -8,4 +8,4 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
     ports:
-      - "8080:80"
+      - "80:8080"

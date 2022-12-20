@@ -53,24 +53,28 @@ sudo apt install maven
 ~~~~
 ##### сборка и развертывание
 ~~~~
-mkdir ./app
-git clone https://${UserGITHUB}:${TOKENGITHUB}@${URL}
 export SPRING_PROFILES_ACTIVE=prod
 . ./env-vars.sh
+mkdir app
+cd ./app
+git clone https://${UserGITHUB}:${TOKENGITHUB}@${URL} --config
+git clone https://${UserGITHUB}:${TOKENGITHUB}@${URL} --application
+cd ./search-context-bot
 
 mvn clean -f config-server/pom.xml
 mvn package -f config-server/pom.xml
 docker build -t config-server:latest -f - config-server < Dockerfile
-docker compose -f ./common-service.yml --env-file ../search-context-config/env-vars.sh up -d
+docker compose -f ./common-service.yml --env-file ../search-context-config/env-vars.sh up -d --windows
+docker-compose -f ./common-service.yml --env-file ../search-context-config/env-vars.sh up -d --linux
 
 mvn clean -f search-flat/pom.xml
 mvn package -f search-flat/pom.xml
 docker build -t search-flat:latest -f - search-flat < Dockerfile
 
 windows
-docker compose --env-file ./env-vars.sh up -d
-linux
 docker compose --env-file ../search-context-config/env-vars.sh up -d
+linux
+docker-compose --env-file ../search-context-config/env-vars.sh up -d
 
 ~~~~
 ##### Создание Backup postgresql https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database

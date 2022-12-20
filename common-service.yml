@@ -2,6 +2,7 @@ version: '2'
 
 services:
   config-server:
+    restart: always
     image: 'config-server:latest'
     container_name: config-server
     environment:

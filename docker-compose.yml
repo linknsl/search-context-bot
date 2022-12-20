@@ -2,8 +2,9 @@ version: '2'
 
 services:
   sf:
+    restart: always
     image: 'search-flat:latest'
-    container_name: search-flat
+    container_name: sf
     environment:
       - SPRING_PROFILES_ACTIVE=${PROFILE}
     ports:

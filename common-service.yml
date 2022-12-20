@@ -4,7 +4,7 @@ services:
   cs:
     restart: always
     image: 'config-server:latest'
-    container_name: config-server
+    container_name: cs
     environment:
       - SPRING_CLOUD_CONFIG_SERVER_GIT_URI=${CONFIG_URL}
       - SPRING_CLOUD_CONFIG_SERVER_GIT_USERNAME=${CONFIG_USERNAME}

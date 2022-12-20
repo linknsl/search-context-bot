@@ -17,9 +17,11 @@ last  - показать последние объявление
 ~~~~
 ### Запуск в docker
 ~~~~
-mvn clean package
-docker build --tag=search-flat:latest .
-docker run -p9000:8080 find-flat-telegram-bot:latest --spring.profiles.active=test
+mvn clean -f config-server/pom.xml && mvn package -f config-server/pom.xml && docker build -t config-server:latest -f - config-server < Dockerfile
+docker-compose -f ./common-service.yml --env-file ../search-context-config/env-vars.sh up -d --remove-orphans
+
+mvn clean -f search-flat/pom.xml && mvn package -f search-flat/pom.xml && docker build -t search-flat:latest -f - search-flat < Dockerfile
+docker-compose --env-file ../search-context-config/env-vars.sh up -d
 ~~~~
 ### Запуск в docker compose
 ~~~~
@@ -83,22 +85,17 @@ http://**/swagger-ui.html
 mvn -pl . liquibase:update
 mvn -pl . liquibase:rollback -D liquibase.rollbackCount=1
 
-### Сборка ветки
+### Сборка ветки release_1.0
 docker stop sf  
 git pull
-git checkout release_v1.0
+git checkout release_1.0
 mvn clean -f search-flat/pom.xml && mvn package -f search-flat/pom.xml && docker build -t search-flat:latest -f - search-flat < Dockerfile
 docker-compose --env-file ../search-context-config/env-vars.sh up -d
-### config-server
-Создание сети
 
-docker network create -d bridge superapp
-
-Config server
-
+### Локальный запуск 
+Необходимо запустить config-server в docker
 Собираем с помощью build.config.bat
-Запускаем один раз
-
-docker run -dit -p 8888:80 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name config-server config-server:latest --spring.profiles.active=dev
+docker network create -d bridge superapp
+docker run -dit -p 8888:8888 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name config-server config-server:latest --spring.profiles.active=dev
+Запуск приложения
 docker run -dit -p 8080:8080 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name search-flat search-flat:latest --spring.profiles.active=dev,db
-java -jar D:\design\search-context-bot\search-flat\target\search-flat-1.0.4.jar --spring.profiles.active=dev,db

@@ -83,7 +83,12 @@ http://**/swagger-ui.html
 mvn -pl . liquibase:update
 mvn -pl . liquibase:rollback -D liquibase.rollbackCount=1
 
-
+### Сборка ветки
+docker stop sf  
+git pull
+git checkout release_v1.0
+mvn clean -f search-flat/pom.xml && mvn package -f search-flat/pom.xml && docker build -t search-flat:latest -f - search-flat < Dockerfile
+docker-compose --env-file ../search-context-config/env-vars.sh up -d
 ### config-server
 Создание сети
 

@@ -18,4 +18,9 @@ public class InfoController {
     public Object getNoticeInfo() throws IOException {
         return noticeService.getNoticeFlats("123456");
     }
+
+    @GetMapping("/all")
+    public Object getAll()  {
+        return "Hello World!!!";
+    }
 }

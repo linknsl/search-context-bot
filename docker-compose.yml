@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  search-flat:
+  sf:
     image: 'search-flat:latest'
     container_name: search-flat
     environment:

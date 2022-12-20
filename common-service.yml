@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  config-server:
+  cs:
     restart: always
     image: 'config-server:latest'
     container_name: config-server

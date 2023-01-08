@@ -28,6 +28,7 @@
         <swagger.version>2.9.2</swagger.version>
         <spring-cloud.version>2021.0.1</spring-cloud.version>
         <liquibase.version>4.4.1</liquibase.version>
+        <springdoc.version>1.6.8</springdoc.version>
         <liquibase.config>${project.root}/src/main/resources/liquibase.properties</liquibase.config>
 
     </properties>
@@ -68,6 +69,11 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

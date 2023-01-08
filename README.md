@@ -1,13 +1,14 @@
 # search-context-bot
 ### Телеграм бот по поиску объявлений квартир на сайте крыша кз
+~~~~
 Бот создает уведомление на телеграм канал о том что на сайте п
 оявилось новое объявление по заданным фильтрам. Поиск происходит через 
 извлечение данных с html страницы на сайте https://krisha.kz выставляем 
 все необходимые фильтры для поиска квартиры Добавляем в переменную среды 
 полученный результат из адресной строки у меня получился такой 
 
-krisha.url: "https://krisha.kz/arenda/kvartiry/almaty/?das[_sys.hasphoto]=1&das[live.furniture][]=1&das[live.furniture][]=2&das[price][from]=100000&das[price][to]=250000&das[who]=1&areas=p43.266981,76.956176,43.265601,76.922187,43.259704,76.902103,43.252176,76.887683,43.249792,76.885108,43.232599,76.884937,43.222557,76.893691,43.219544,76.913776,43.224063,76.946220,43.226197,76.954460,43.235862,76.967849,43.253055,76.976089,43.264472,76.969566,43.268235,76.964588,43.268737,76.959781,43.265977,76.947593,43.267231,76.940555,43.266981,76.956176&zoom=12&lat=43.23684&lon=76.87713"
-
+polling.config.url: "https://krisha.kz/arenda/kvartiry/almaty/?das[_sys.hasphoto]=1&das[live.furniture][]=1&das[live.furniture][]=2&das[price][from]=100000&das[price][to]=250000&das[who]=1&areas=p43.266981,76.956176,43.265601,76.922187,43.259704,76.902103,43.252176,76.887683,43.249792,76.885108,43.232599,76.884937,43.222557,76.893691,43.219544,76.913776,43.224063,76.946220,43.226197,76.954460,43.235862,76.967849,43.253055,76.976089,43.264472,76.969566,43.268235,76.964588,43.268737,76.959781,43.265977,76.947593,43.267231,76.940555,43.266981,76.956176&zoom=12&lat=43.23684&lon=76.87713"
+~~~~
 ##### 1.Команды
 ~~~~
 start - старт мониторинга
@@ -71,32 +72,40 @@ docker-compose --env-file ../search-context-config/env-vars.sh up -d
 
 ~~~~
 ##### Создание Backup postgresql https://stackoverflow.com/questions/24718706/backup-restore-a-dockerized-postgresql-database
+~~~~
 docker exec -t db pg_dumpall -c -U ${DATASOURCE_USERNAME} > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+~~~~
 ##### Восстановление postgresql
+~~~~
 cat your_dump.sql | docker exec -i db psql -U postgres
-
+~~~~
 ### Swagger для ознакомления с api:
+~~~~
 http://localhost:8080/swagger-ui/index.html
-
+~~~~
 ##### 3. работа с миграциями
+~~~~
 Для автоматического  обновления при старте необходимо в файле application.yml
 установить   liquibase.enabled: true
 Для автоматического обновления
 mvn -pl . liquibase:update
 mvn -pl . liquibase:rollback -D liquibase.rollbackCount=1
-
+~~~~
 ### Сборка ветки release_1.0
+~~~~
 docker stop db
 docker stop sf  
 git pull
 git checkout release_1.0
 mvn clean -f search-flat/pom.xml && mvn package -f search-flat/pom.xml && docker build -t search-flat:latest -f - search-flat < Dockerfile
 docker-compose --env-file ../search-context-config/env-vars.sh up -d
-
+~~~~
 ### Локальный запуск 
+~~~~
 Необходимо запустить config-server в docker
 Собираем с помощью build.config.bat
 docker network create -d bridge superapp
 docker run -dit -p 8888:8888 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name config-server config-server:latest --spring.profiles.active=dev
 Запуск приложения
 docker run -dit -p 8080:8080 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name search-flat search-flat:latest --spring.profiles.active=dev,db
+~~~~

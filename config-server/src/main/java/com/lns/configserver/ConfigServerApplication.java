@@ -1,4 +1,4 @@
-package kz.bffin.superapp.configserver;
+package com.lns.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

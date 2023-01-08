@@ -31,7 +31,7 @@ docker-compose down --volumes
 docker-compose up
 ~~~~
 ### Развертывание на linux ubuntu 20 (hosting VPS) 
-#####Docker установка
+##### Docker установка
 ~~~~Большая часть информации взята из данной статьи https://totaku.ru/ustanovka-docker-i-docker-compose-na-ubuntu-20-04
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
@@ -42,18 +42,18 @@ sudo apt-cache policy docker-ce
 sudo apt install docker-ce
 sudo usermod -aG docker ${user}
 ~~~~
-#####Docker-compose установка
+##### Docker-compose установка
 ~~~~
 curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ~~~~
-#####java maven установка
+##### Java maven установка
 ~~~~ 
 sudo apt install openjdk-8-jdk
 sudo apt install maven
 ~~~~
-##### сборка и развертывание
+##### Сборка и развертывание
 ~~~~
 export SPRING_PROFILES_ACTIVE=prod
 . ./env-vars.sh
@@ -75,8 +75,8 @@ docker exec -t db pg_dumpall -c -U ${DATASOURCE_USERNAME} > dump_`date +%d-%m-%Y
 ##### Восстановление postgresql
 cat your_dump.sql | docker exec -i db psql -U postgres
 
-###Swagger для ознакомления с api:
-http://**/swagger-ui.html
+### Swagger для ознакомления с api:
+http://localhost:8080/swagger-ui/index.html
 
 ##### 3. работа с миграциями
 Для автоматического  обновления при старте необходимо в файле application.yml
@@ -86,6 +86,7 @@ mvn -pl . liquibase:update
 mvn -pl . liquibase:rollback -D liquibase.rollbackCount=1
 
 ### Сборка ветки release_1.0
+docker stop db
 docker stop sf  
 git pull
 git checkout release_1.0

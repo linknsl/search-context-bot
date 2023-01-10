@@ -109,3 +109,6 @@ docker run -dit -p 8888:8888 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart
 Запуск приложения
 docker run -dit -p 8080:8080 -e "JAVA_OPTS=-Xmx64m" --network superapp --restart=unless-stopped --name search-flat search-flat:latest --spring.profiles.active=dev,db
 ~~~~
+### liqubase миграции скопировать из
+search-context-config UpdatePostgreDB.run.xml RollbackPostgreDB.run.xml
+при помощи данных конфигураций можно накатывать миграции

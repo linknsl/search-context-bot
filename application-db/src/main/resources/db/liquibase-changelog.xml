@@ -3,8 +3,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <include file="runAlways/before/changelog_cumulative.xml" relativeToChangelogFile="true"/>
+<!--    <include file="runAlways/before/changelog_cumulative.xml" relativeToChangelogFile="true"/>-->
     <include file="v1.0/changelog_cumulative_v1.0.xml" relativeToChangelogFile="true"/>
-    <include file="runOnChange/changelog_cumulative.xml" relativeToChangelogFile="true"/>
-    <include file="runAlways/after/changelog_cumulative.xml" relativeToChangelogFile="true"/>
+<!--    <include file="runOnChange/changelog_cumulative.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="runAlways/after/changelog_cumulative.xml" relativeToChangelogFile="true"/>-->
 </databaseChangeLog>

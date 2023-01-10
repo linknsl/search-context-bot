@@ -2,3 +2,5 @@
 /application-db/target/
 /config-server/target/
 /search-flat/target/
+/.run/RollPostgreDB.run.xml
+/.run/UpdatePostgreDB.run.xml

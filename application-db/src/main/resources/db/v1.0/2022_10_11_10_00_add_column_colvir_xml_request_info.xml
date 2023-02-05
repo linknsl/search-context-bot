@@ -5,15 +5,15 @@
 
     <changeSet author="LizogubNS" id="2022_10_11_10_00_add_column_colvir_xml_request_info">
         <comment>
-            Добавление колонки colvir_xml_body
+            Добавление колонки test_feild
         </comment>
-        <addColumn tableName="request_info" schemaName="bpmn_info">
-            <column name="colvir_xml_body" type="VARCHAR(255)" remarks="Описание" afterColumn="ogrn"/>
+        <addColumn tableName="notice_flat">
+            <column name="test_feild" type="VARCHAR(255)" remarks="Описание" afterColumn="ogrn"/>
         </addColumn>
 
         <rollback>
-            <dropColumn tableName="request_info" schemaName="bpmn_info">
-                <column name="colvir_xml_body"/>
+            <dropColumn tableName="notice_flat">
+                <column name="test_feild"/>
             </dropColumn>
         </rollback>
     </changeSet>

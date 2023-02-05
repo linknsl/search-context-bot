@@ -10,7 +10,7 @@
     </parent>
 
     <artifactId>search-flat</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <name>search-flat</name>
     <description>Project polling site krisha.kz find flat</description>
 
